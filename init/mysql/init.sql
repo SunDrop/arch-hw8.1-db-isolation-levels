@@ -2,7 +2,7 @@ USE transactions;
 
 CREATE TABLE users
 (
-    id   integer primary key,
+    id   integer primary key auto_increment,
     name varchar(20),
     age  integer
 );

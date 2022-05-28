@@ -60,3 +60,26 @@ SELECT @@transaction_isolation;
 /* Query 2 */
 INSERT INTO users(id, name, age) VALUES (3, 'Bob', 27);
 COMMIT;
+########################
+
+
+########################
+# Serialization anomaly
+SET GLOBAL TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+SELECT @@transaction_isolation;
+
+START TRANSACTION;
+/* Query 2 */
+SELECT *
+FROM users;
+
+/* Query 4 */
+SELECT @sum := sum(age)
+FROM users;
+/* will return 45 */
+
+/* Query 5 */
+INSERT INTO users (name, age) VALUES ('users', @sum);
+
+COMMIT;

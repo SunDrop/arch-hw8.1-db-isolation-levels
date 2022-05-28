@@ -59,3 +59,23 @@ INSERT INTO transactions.public.users(id, name, age)
 VALUES (3, 'Bob', 27);
 COMMIT;
 ----------------------------------------------------
+
+
+----------------------------------------------------
+-- Serialization anomaly
+START TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+SELECT current_setting('transaction_isolation');
+
+/* Query 2 */
+SELECT *
+FROM transactions.public.users;
+
+/* Query 4 */
+SELECT sum(age)
+FROM transactions.public.users;
+/* will return 45 */
+
+/* Query 6 with commit */
+INSERT INTO transactions.public.users (id, name, age)
+SELECT nextval('user_sequence'), 'users', sum(age) FROM transactions.public.users;
+COMMIT;
