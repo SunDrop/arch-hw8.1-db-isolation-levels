@@ -23,8 +23,8 @@ $ make postgres
 |:-------------------------------|:-----------:|:------------:|:--------------------:|:-------------:|:---------------------:|
 | Read Uncommitted               |      +      |      +       |          +           |       +       |           +           |
 | Read Committed                 |      -      |      +       |          +           |       -       |           +           |
-| Repeatable Read                |      -      |      +       |          +           |       -       |          [+]          |
-| Serializable                   |      -      |      -       |          -           |       -       |          [-]          |
+| Repeatable Read                |      -      |      +       |          +           |       -       |           +           |
+| Serializable                   |      -      |      -       |          -           |       -       |           -           |
 * `+` means can be reproduced, `-` means can't be reproduced
 * You will never found phantoms on InnoDB mysql with read committed or more restricted isolation level. It is explained on documentation:
 REPEATABLE READ: For consistent reads, there is an important difference from the READ COMMITTED isolation level: All consistent **reads within the same transaction read the snapshot established by the first read**. This convention means that if you issue several plain (nonlocking) SELECT statements within the same transaction, these SELECT statements are consistent also with respect to each other. See Section 13.6.8.2, “Consistent Nonlocking Reads”.
