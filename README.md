@@ -227,7 +227,7 @@ COMMIT;
 ```
 
 ## Postgres
-```postgresql
+```sql
 -- SESSION 1
 \set AUTOCOMMIT off;
 
@@ -329,7 +329,7 @@ INSERT INTO transactions.public.users (id, name, age)
 SELECT nextval('user_sequence'), 'users', sum(age) FROM transactions.public.users;
 COMMIT;
 ```
-```postgresql
+```sql
 -- SESSION 2
 \set AUTOCOMMIT off;
 
