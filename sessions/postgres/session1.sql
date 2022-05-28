@@ -30,9 +30,9 @@ SELECT age
 FROM transactions.public.users
 WHERE id = 1;
 
-/* Query 3 */
+/* Query 3 with commit */
 UPDATE transactions.public.users
-SET age = 20 + 1
+SET age = (SELECT age FROM transactions.public.users WHERE id = 1) + 1
 WHERE id = 1; -- we read 20 before
 COMMIT;
 /* will write 21 */
